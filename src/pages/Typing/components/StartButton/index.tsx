@@ -12,8 +12,11 @@ export default function StartButton({ isLoading }: { isLoading: boolean }) {
   const randomConfig = useAtomValue(randomConfigAtom)
 
   const onToggleIsTyping = useCallback(() => {
-    !isLoading && dispatch({ type: TypingStateActionType.TOGGLE_IS_TYPING })
-  }, [isLoading, dispatch])
+    if (isLoading) return
+
+    if (!state.isTyping) document.getElementById('typing-input')?.focus()
+    dispatch({ type: TypingStateActionType.TOGGLE_IS_TYPING })
+  }, [isLoading, state.isTyping, dispatch])
 
   const onClickRestart = useCallback(() => {
     dispatch({ type: TypingStateActionType.REPEAT_CHAPTER, shouldShuffle: randomConfig.isOpen })
@@ -32,7 +35,7 @@ export default function StartButton({ isLoading }: { isLoading: boolean }) {
   const { getReferenceProps, getFloatingProps } = useInteractions([hoverButton])
 
   return (
-    <Tooltip content={`${state.isTyping ? '暂停' : '开始'} （Enter）`} className="box-content h-7 w-8 px-6 py-1">
+    <Tooltip content={`${state.isTyping ? '暂停' : '开始'} （Enter）`} className="box-content h-7 w-20 px-0 py-1 sm:w-8 sm:px-6">
       <div
         ref={refs.setReference}
         {...getReferenceProps()}

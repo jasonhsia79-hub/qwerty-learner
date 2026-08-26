@@ -7,8 +7,11 @@ import { useMemo } from 'react'
 
 export default function InputHandler({ updateInput }: { updateInput: (updateObj: WordUpdateAction) => void }) {
   const dictInfo = useAtomValue(currentDictInfoAtom)
+  const usesTouchKeyboard = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0
 
   const handler = useMemo(() => {
+    if (usesTouchKeyboard) return <TextAreaHandler updateInput={updateInput} />
+
     switch (dictInfo.language) {
       case 'en':
         return <KeyEventHandler updateInput={updateInput} />
@@ -21,7 +24,7 @@ export default function InputHandler({ updateInput }: { updateInput: (updateObj:
       default:
         return <TextAreaHandler updateInput={updateInput} />
     }
-  }, [dictInfo.language, updateInput])
+  }, [dictInfo.language, updateInput, usesTouchKeyboard])
 
   return <>{handler}</>
 }

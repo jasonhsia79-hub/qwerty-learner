@@ -1,6 +1,7 @@
 {
-  "short_name": "Qwerty Learner",
-  "name": "Qwerty Learner",
+  "id": ".",
+  "short_name": "每日英语",
+  "name": "每日英语 · Qwerty Learner",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,7 +20,11 @@
     }
   ],
   "start_url": ".",
+  "scope": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "theme_color": "#818cf8",
+  "background_color": "#faf9ff",
+  "categories": ["education"]
 }

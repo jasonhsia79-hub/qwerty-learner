@@ -39,10 +39,17 @@ export default function TextAreaHandler({ updateInput }: { updateInput: (updateO
 
   return (
     <textarea
-      className="absolute left-0 top-0 m-0 h-0 w-0 appearance-none overflow-hidden border-0 p-0 focus:outline-none"
+      id="typing-input"
+      aria-label="单词输入"
+      className="fixed bottom-0 left-1/2 m-0 h-px w-px appearance-none overflow-hidden border-0 p-0 opacity-0 focus:outline-none"
       ref={textareaRef}
       autoFocus
-      spellCheck="false"
+      autoCapitalize="none"
+      autoComplete="off"
+      autoCorrect="off"
+      enterKeyHint="done"
+      inputMode="text"
+      spellCheck={false}
       onInput={onInput}
       onBlur={onBlur}
       onCompositionStart={() => {

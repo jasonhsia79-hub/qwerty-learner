@@ -149,8 +149,8 @@ export default function WordPanel() {
   }, [isShowTranslation, state.isTransVisible])
 
   return (
-    <div className="container flex h-full w-full flex-col items-center justify-center">
-      <div className="container flex h-24 w-full shrink-0 grow-0 justify-between px-12 pt-10">
+    <div className="container flex h-full min-h-0 w-full flex-col items-center justify-center">
+      <div className="container flex h-8 w-full shrink-0 grow-0 justify-between px-4 pt-2 sm:h-24 sm:px-12 sm:pt-10">
         {isShowPrevAndNextWord && state.isTyping && (
           <>
             <PrevAndNextWord type="prev" />
@@ -160,17 +160,18 @@ export default function WordPanel() {
       </div>
       <div className="container flex flex-grow flex-col items-center justify-center">
         {currentWord && (
-          <div className="relative flex w-full justify-center">
+          <div className="relative flex w-full min-w-0 justify-center px-5 sm:px-0">
             {!state.isTyping && (
               <div className="absolute flex h-full w-full justify-center">
                 <div className="z-10 flex w-full items-center backdrop-blur-sm">
                   <p className="w-full select-none text-center text-xl text-gray-600 dark:text-gray-50">
-                    按任意键{state.timerData.time ? '继续' : '开始'}
+                    <span className="sm:hidden">点 Start {state.timerData.time ? '继续' : '开始'}</span>
+                    <span className="hidden sm:inline">按任意键{state.timerData.time ? '继续' : '开始'}</span>
                   </p>
                 </div>
               </div>
             )}
-            <div className="relative">
+            <div className="relative max-w-full">
               <WordComponent word={currentWord} onFinish={onFinish} key={wordComponentKey} />
               {phoneticConfig.isOpen && <Phonetic word={currentWord} />}
               <Translation
@@ -183,7 +184,7 @@ export default function WordPanel() {
           </div>
         )}
       </div>
-      <Progress className={`mb-10 mt-auto ${state.isTyping ? 'opacity-100' : 'opacity-0'}`} />
+      <Progress className={`mb-2 mt-auto sm:mb-10 ${state.isTyping ? 'opacity-100' : 'opacity-0'}`} />
     </div>
   )
 }
